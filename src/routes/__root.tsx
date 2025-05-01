@@ -1,14 +1,21 @@
+import { scan } from "react-scan";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-
-import Header from "../components/Header";
 
 import TanstackQueryLayout from "../integrations/tanstack-query/layout";
 
 import TanstackQueryProvider from "../integrations/tanstack-query/provider";
 
 export const Route = createRootRoute({
-	component: () => (
+	component: RouteComponent,
+});
+
+function RouteComponent() {
+	scan({
+		enabled: true
+	});
+
+	return (
 		<>
 			<TanstackQueryProvider>
 
@@ -18,5 +25,5 @@ export const Route = createRootRoute({
 				<TanstackQueryLayout />
 			</TanstackQueryProvider>
 		</>
-	),
-});
+	)
+}
