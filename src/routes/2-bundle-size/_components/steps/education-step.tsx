@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -22,7 +21,6 @@ type EducationValues = z.infer<typeof educationSchema>
 
 export default function EducationStep() {
   const { formData, updateFormData } = useFormContext()
-  const [, setIsSubmitting] = useState(false)
 
   // Get current year for validation
   const currentYear = new Date().getFullYear()
@@ -39,9 +37,7 @@ export default function EducationStep() {
   })
 
   const handleNext = async () => {
-    setIsSubmitting(true)
     const valid = await form.trigger()
-    setIsSubmitting(false)
 
     if (valid) {
       const values = form.getValues()

@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -22,7 +21,6 @@ type PersonalInfoValues = z.infer<typeof personalInfoSchema>
 
 export default function PersonalInfoStep() {
   const { formData, updateFormData } = useFormContext()
-  const [, setIsSubmitting] = useState(false)
 
   // Initialize form with existing values
   const form = useForm<PersonalInfoValues>({
@@ -36,9 +34,7 @@ export default function PersonalInfoStep() {
   })
 
   const handleNext = async () => {
-    setIsSubmitting(true)
     const valid = await form.trigger()
-    setIsSubmitting(false)
 
     if (valid) {
       const values = form.getValues()

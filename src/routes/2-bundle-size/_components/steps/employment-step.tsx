@@ -33,7 +33,6 @@ const createEmploymentSchema = (employmentStatus: string | undefined) => {
 
 export default function EmploymentStep() {
   const { formData, updateFormData } = useFormContext()
-  const [, setIsSubmitting] = useState(false)
   const [employmentStatus, setEmploymentStatus] = useState(formData.employmentStatus)
 
   // Create a form with dynamic validation based on employment status
@@ -54,9 +53,7 @@ export default function EmploymentStep() {
   }, [employmentStatus, form])
 
   const handleNext = async () => {
-    setIsSubmitting(true)
     const valid = await form.trigger()
-    setIsSubmitting(false)
 
     if (valid) {
       const values = form.getValues()

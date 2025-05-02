@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -22,7 +21,6 @@ type PreferencesValues = z.infer<typeof preferencesSchema>
 
 export default function PreferencesStep() {
   const { formData, updateFormData } = useFormContext()
-  const [, setIsSubmitting] = useState(false)
 
   // Initialize form with existing values
   const form = useForm<PreferencesValues>({
@@ -36,9 +34,7 @@ export default function PreferencesStep() {
   })
 
   const handleNext = async () => {
-    setIsSubmitting(true)
     const valid = await form.trigger()
-    setIsSubmitting(false)
 
     if (valid) {
       const values = form.getValues()

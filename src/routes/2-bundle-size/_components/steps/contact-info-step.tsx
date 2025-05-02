@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -20,7 +19,6 @@ type ContactInfoValues = z.infer<typeof contactInfoSchema>
 
 export default function ContactInfoStep() {
   const { formData, updateFormData } = useFormContext()
-  const [, setIsSubmitting] = useState(false)
 
   // Initialize form with existing values
   const form = useForm<ContactInfoValues>({
@@ -35,9 +33,7 @@ export default function ContactInfoStep() {
   })
 
   const handleNext = async () => {
-    setIsSubmitting(true)
     const valid = await form.trigger()
-    setIsSubmitting(false)
 
     if (valid) {
       const values = form.getValues()
